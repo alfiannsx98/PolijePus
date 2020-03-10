@@ -65,34 +65,46 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newModal">Buat Postingan</h5>
+                <h5 class="modal-title" id="newModal">Tambah Koleksi</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <?= form_open_multipart('arsip'); ?>
+                <?= form_open_multipart('koleksi'); ?>
                 <div class="form-group">
-                    <label for="">NIM</label>
-                    <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan Nim">
+                    <label for="">ID Koleksi</label>
+                    <input type="text" class="form-control" id="id_koleksi" name="id_koleksi" placeholder="Masukkan ID Koleksi">
                 </div>
                 <div class="form-group">
                     <label for="">Judul</label>
                     <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan Judul">
                 </div>
                 <div class="form-group">
-                    <label for="">Abstrak</label>
-                    <textarea name="abstrak" id="abstrak" cols="15" rows="10" class="form-control" placeholder="Masukkan Abstrak"></textarea>
+                    <label for="">NIM</label>
+                    <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM">
                 </div>
                 <div class="form-group">
-                    <label for="">Keywords</label>
-                    <input type="text" class="form-control" id="keywords" name="keywords" placeholder="Masukkan Keywords">
+                    <label for="">ISBN</label>
+                    <input type="text" class="form-control" id="isbn" name="isbn" placeholder="Masukkan ISBN">
                 </div>
                 <div class="form-group">
-                    <label for="">Kategori Arsip</label>
-                    <select name="id_jns_arsip" id="id_jns_arsip" class="form-control">
-                        <?php foreach ($getArsipJenis as $kt) : ?>
-                            <option value="<?= $kt['id_jns_arsip']; ?>"><?= $kt['jns_arsip']; ?></option>
+                    <label for="">Penerbit</label>
+                    <input type="text" class="form-control" id="penerbit" name="penerbit" placeholder="Masukkan Penerbit">
+                </div>
+                <div class="form-group">
+                    <label for="">Penulis</label>
+                    <input type="text" class="form-control" id="penulis" name="penulis" placeholder="Masukkan Penulis">
+                </div>
+                <div class="form-group">
+                    <label for="">Tahun Terbit</label>
+                    <input type="text" class="form-control" id="tahun_terbit" name="tahun_terbit" placeholder="Masukkan Tahun Terbit">
+                </div>
+                <div class="form-group">
+                    <label for="">Kategori Koleksi</label>
+                    <select name="id_kategori" id="id_kategori" class="form-control">
+                        <?php foreach ($getKategoriKoleksi as $kt) : ?>
+                            <option value="<?= $kt['id_kategori']; ?>"><?= $kt['nama_kategori']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -108,21 +120,36 @@
 
 <!--MODAL EDIT DATA-->
 <?php
-foreach ($arsip as $i) :
-    $nim = $i['nim'];
+foreach ($koleksi as $i) :
+    $id_koleksi = $i['id_koleksi'];
     $judul = $i['judul'];
-    $abstrak = $i['abstrak'];
-    $keywords = $i['keywords'];
+    $nim = $i['nim'];
+    $isbn = $i['isbn'];
+    $penerbit = $i['penerbit'];
+    $penulis = $i['penulis'];
+    $tahun_terbit = $i['tahun_terbit'];
     ?>
-    <div class="modal fade" id="modal_edit<?= $nim; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal fade" id="modal_edit<?= $id_koleksi; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel">Edit Post</h3>
+                    <h3 class="modal-title" id="myModalLabel">Edit Koleksi</h3>
                     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
                 </div>
-                <?= form_open_multipart('arsip/edit_arsip'); ?>
+                <?= form_open_multipart('koleksi/edit_koleksi'); ?>
                 <div class="modal-body">
+                    <div class="form-group">
+                        <label for="" class="control-label col-xs-3">ID Koleksi</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="id_koleksi" value="<?= $id_koleksi; ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3">Judul</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="judul" value="<?= $judul; ?>">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="" class="control-label col-xs-3">NIM</label>
                         <div class="col-xs-8">
@@ -130,28 +157,34 @@ foreach ($arsip as $i) :
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3">Judul Arsip</label>
+                        <label class="control-label col-xs-3">ISBN</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" name="judul" value="<?= $judul; ?>">
+                            <input type="text" class="form-control" name="isbn" value="<?= $isbn; ?>">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3">Abstrak Arsip</label>
+                        <label class="control-label col-xs-3">Penerbit</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" name="abstrak" value="<?= $abstrak; ?>">
+                            <input type="text" class="form-control" name="penerbit" value="<?= $penerbit; ?>">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3">Keywords Arsip</label>
+                        <label class="control-label col-xs-3">Penulis</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" name="keywords" value="<?= $keywords; ?>">
+                            <input type="text" class="form-control" name="penulis" value="<?= $penulis; ?>">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="control-label  col-xs-3">Kategori Arsip</label>
-                        <select class="form-control" name="id_jns_arsip" id="id_jns_arsip">
-                            <?php foreach ($getArsipJenis as $bc) : ?>
-                                <option value="<?= $bc['id_jns_arsip']; ?>"><?= $bc['jns_arsip']; ?></option>
+                        <label class="control-label col-xs-3">Tahun Terbit</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="tahun_terbit" value="<?= $tahun_terbit; ?>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label  col-xs-3">Kategori Koleksi</label>
+                        <select class="form-control" name="id_kategori" id="id_kategori">
+                            <?php foreach ($getKategoriKoleksi as $bc) : ?>
+                                <option value="<?= $bc['id_kategori']; ?>"><?= $bc['nama_kategori']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -165,19 +198,19 @@ foreach ($arsip as $i) :
         </div>
     </div>
 
-    <div class="modal fade" id="modal_hapus<?= $nim; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal fade" id="modal_hapus<?= $id_koleksi; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Hapus Menu</h3>
                     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
                 </div>
-                <form action="<?= base_url() . 'arsip/hapus_arsip'; ?>" method="post" class="form-horizontal">
+                <form action="<?= base_url() . 'koleksi/hapus_koleksi'; ?>" method="post" class="form-horizontal">
                     <div class="modal-body">
-                        <p>Apakah Anda Yakin mau menghapus Arsip dengan judul "<b><?= $judul; ?></b>"</p>
+                        <p>Apakah Anda Yakin mau Menghapus Koleksi dengan judul "<b><?= $judul; ?></b>"</p>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="nim" value="<?= $nim; ?>">
+                        <input type="hidden" name="id_koleksi" value="<?= $id_koleksi; ?>">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
                         <button class="btn btn-danger">Hapus Data</button>
                     </div>

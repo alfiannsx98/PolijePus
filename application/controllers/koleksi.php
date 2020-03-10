@@ -7,7 +7,7 @@ class Koleksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('model_koleksi');
-        $this->load->model('model_kategori_koleksi');
+        // $this->load->model('model_kategori_koleksi');
         // is_logged_in();
     }
     public function index()
@@ -23,7 +23,6 @@ class Koleksi extends CI_Controller
         $this->form_validation->set_rules('tahun_terbit', 'Tahun_terbit', 'required');
 
         $data['koleksi'] = $this->model_koleksi->getKoleksi();
-        $data['kategori_koleksi'] = $this->model_koleksi->get_kategori_koleksi();
         $data['getKategoriKoleksi'] = $this->db->get('kategori_koleksi')->result_array();
 
         if ($this->form_validation->run() == false){
