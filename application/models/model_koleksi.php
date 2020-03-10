@@ -20,4 +20,14 @@ class model_koleksi extends CI_Model
         $hasil = $this->db->query("DELETE FROM koleksi WHERE id_koleksi='$id_koleksi'");
         return $hasil;
     }
+    function edit_kategori($id_kategori, $nama_kategori)
+    {
+        $hasil1 = $this->db->query("UPDATE kategori_koleksi SET nama_kategori='$nama_kategori' WHERE id_kategori='$id_kategori'");
+        return $hasil1;
+    }
+    function hapus_kategori($id_kategori)
+    {
+        $hasil2 = $this->db->query("DELETE FROM kategori_koleksi WHERE id_kategori='$id_kategori'");
+        return $hasil2;
+    }
 }

@@ -96,16 +96,22 @@ class Koleksi extends CI_Controller
             $this->load->view('koleksi/kategori_koleksi', $data);
             $this->load->view('templates/footer');
         }else{
-            $this->db->insert('kategori_koleksi', ['kategori_koleksi' => $this->input->post('kategori_koleksi')]);
+            $this->db->insert('kategori_koleksi', ['nama_kategori' => $this->input->post('nama_kategori')]);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambahkan</div>');
             redirect('koleksi/kategori_koleksi');
         }
     }
     public function edit_kategori()
     {
-        $id_kategori = $this->input->post('id');
+        $id_kategori = $this->input->post('id_kategori');
         $nama_kategori = $this->input->post('nama_kategori');
         $this->model_koleksi->edit_kategori($id_kategori, $nama_kategori);
+        redirect('koleksi/kategori_koleksi');
+    }
+    public function hapus_kategori()
+    {
+        $id_kategori = $this->input->post('id_kategori');
+        $this->model_koleksi->hapus_kategori($id_kategori);
         redirect('koleksi/kategori_koleksi');
     }
 }
