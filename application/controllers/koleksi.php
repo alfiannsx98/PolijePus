@@ -7,7 +7,6 @@ class Koleksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('model_koleksi');
-        // $this->load->model('model_kategori_koleksi');
         // is_logged_in();
     }
     public function index()
