@@ -20,7 +20,7 @@ class Buku extends CI_Controller
         $this->form_validation->set_rules('judul', 'Judul', 'required');
         $this->form_validation->set_rules('isi', 'Isi', 'required');
 
-        $data['buku'] = $this->model_post->getKategori();
+        $data['buku'] = $this->model_buku->getBuku();
         $data['getBukuKategori'] = $this->db->get('kategori')->result_array();
 
         if ($this->form_validation->run() == false) {
