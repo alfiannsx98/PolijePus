@@ -8,7 +8,7 @@ class Arsip extends CI_Controller
         parent::__construct();
         $this->load->model('model_arsip');
         $this->load->model('model_arsip_jenis');
-        is_logged_in();
+        
     }
     public function index()
     {
@@ -41,5 +41,11 @@ class Arsip extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambahkan</div>');
             redirect('arsip');
         }
+    }
+    public function hapus_arsip()
+    {
+        $nim = $this->input->post('nim');
+        $this->model_arsip->hapus_arsip($nim);
+        redirect('arsip');
     }
 }

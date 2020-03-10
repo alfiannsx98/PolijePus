@@ -6,7 +6,7 @@ class model_arsip extends CI_Model
     {
         $getArsp = "SELECT `arsip`.*,`jenis_arsip`.`jns_arsip` 
         FROM `arsip` JOIN `jenis_arsip`
-        ON `arsip`.`id_jns_arsip` = `jenis_arsip`.`id`
+        ON `arsip`.`id_jns_arsip` = `jenis_arsip`.`id_jns_arsip`
         ";
         return $this->db->query($getArsp)->result_array();
     }
