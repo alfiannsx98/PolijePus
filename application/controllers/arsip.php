@@ -29,6 +29,7 @@ class Arsip extends CI_Controller
             $this->load->view('templates/topbar', $data);
             $this->load->view('arsip/index', $data);
             $this->load->view('templates/footer');
+            // asd
         }else{
             $data = [
                 'nim' => ($this->input->post('nim')),
