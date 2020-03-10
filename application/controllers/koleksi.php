@@ -8,7 +8,7 @@ class Koleksi extends CI_Controller
         parent::__construct();
         $this->load->model('model_koleksi');
         $this->load->model('model_kategori_koleksi');
-        
+        // is_logged_in();
     }
     public function index()
     {
@@ -23,6 +23,7 @@ class Koleksi extends CI_Controller
         $this->form_validation->set_rules('tahun_terbit', 'Tahun_terbit', 'required');
 
         $data['koleksi'] = $this->model_koleksi->getKoleksi();
+        $data['kategori_koleksi'] = $this->model_koleksi->get_kategori_koleksi();
         $data['getKategoriKoleksi'] = $this->db->get('kategori_koleksi')->result_array();
 
         if ($this->form_validation->run() == false){
@@ -65,8 +66,6 @@ class Koleksi extends CI_Controller
         $tahun_terbit= $this->input->post('tahun_terbit');
         $id_kategori= $this->input->post('id_kategori');
 
-
-
         $this->db->set('judul', $judul);
         $this->db->set('nim', $nim);
         $this->db->set('isbn', $isbn);
@@ -77,5 +76,36 @@ class Koleksi extends CI_Controller
         $this->db->update('koleksi');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat Data telah Berhasil Diperbarui</div>');
         redirect('koleksi');
+    }
+    public function kategori_koleksi()
+    {
+        $data['title'] = 'Kategori Koleksi';
+        $data['user'] = $this->db->get_where('user',[
+            'email' =>
+            $this->session->userdata('email')
+        ])->row_array();
+
+        $this->form_validation->set_rules('nama_kategori', 'Nama_kategori', 'required');
+
+        $data['kategori_koleksi'] = $this->db->get('kategori_koleksi')->result_array();
+
+        if($this->form_validation->run() == false){
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('koleksi/kategori_koleksi', $data);
+            $this->load->view('templates/footer');
+        }else{
+            $this->db->insert('kategori_koleksi', ['kategori_koleksi' => $this->input->post('kategori_koleksi')]);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambahkan</div>');
+            redirect('koleksi/kategori_koleksi');
+        }
+    }
+    public function edit_kategori()
+    {
+        $id_kategori = $this->input->post('id');
+        $nama_kategori = $this->input->post('nama_kategori');
+        $this->model_koleksi->edit_kategori($id_kategori, $nama_kategori);
+        redirect('koleksi/kategori_koleksi');
     }
 }
