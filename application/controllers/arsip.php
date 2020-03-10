@@ -8,7 +8,7 @@ class Arsip extends CI_Controller
         parent::__construct();
         $this->load->model('model_arsip');
         $this->load->model('model_arsip_jenis');
-        
+        is_logged_in();
     }
     public function index()
     {
