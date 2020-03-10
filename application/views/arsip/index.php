@@ -108,68 +108,46 @@ foreach ($arsip as $i) :
     $abstrak = $i['abstrak'];
     $keywords = $i['keywords'];
     ?>
-    <div class="modal fade" id="modal_edit<?= $id; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal fade" id="modal_edit<?= $nim; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Edit Post</h3>
                     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
                 </div>
-                <?= form_open_multipart('cms/edit'); ?>
+                <?= form_open_multipart('arsip/edit_arsip'); ?>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="" class="control-label col-xs-3">ID Post</label>
+                        <label for="" class="control-label col-xs-3">NIM</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" name="id_post" value="<?= $id; ?>" readonly>
+                            <input type="text" class="form-control" name="nim" value="<?= $nim; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3">Judul Postingan</label>
+                        <label class="control-label col-xs-3">Judul Arsip</label>
                         <div class="col-xs-8">
                             <input type="text" class="form-control" name="judul" value="<?= $judul; ?>">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="control-label  col-xs-3">Kategori</label>
-                        <select class="form-control" name="id_kategori" id="id_kategori">
-                            <?php foreach ($getKategori as $bc) : ?>
-                                <option value="<?= $bc['id']; ?>"><?= $bc['kategori']; ?></option>
+                        <label class="control-label col-xs-3">Abstrak Arsip</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="abstrak" value="<?= $abstrak; ?>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3">Keywords Arsip</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="keywords" value="<?= $keywords; ?>">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label  col-xs-3">Kategori Arsip</label>
+                        <select class="form-control" name="id_jns_arsip" id="id_jns_arsip">
+                            <?php foreach ($getArsipJenis as $bc) : ?>
+                                <option value="<?= $bc['id_jns_arsip']; ?>"><?= $bc['jns_arsip']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">isi</label>
-                        <div class="col-xs-8">
-                            <textarea name="isi" cols="30" rows="10" class="form-control"><?= $isi; ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">User</label>
-                        <div class="col-xs-8">
-                            <input type="text" class="form-control" id="id_user" name="id_user" readonly value="<?= $nama; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="control-label col-xs-3">Tanggal</label>
-                        <div class="col-xs-8">
-                            <input type="text" class="form-control" name="tanggal" value="<?= $tanggal; ?>" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="control label col-xs-3">Gambar Awal</label>
-                        <div class="col-sm-10">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <img src="<?= base_url('assets/img/post/') . $i['gambar']; ?>" class="img-thumbnail">
-                                </div>
-                                <div class="col-sm">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="gambar" name="gambar">
-                                        <label for="gambar" class="custom-file-label">Pilih Gambar</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
@@ -181,19 +159,19 @@ foreach ($arsip as $i) :
         </div>
     </div>
 
-    <div class="modal fade" id="modal_hapus<?= $id; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal fade" id="modal_hapus<?= $nim; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Hapus Menu</h3>
                     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
                 </div>
-                <form action="<?= base_url() . 'cms/hapus_post'; ?>" method="post" class="form-horizontal">
+                <form action="<?= base_url() . 'arsip/hapus_arsip'; ?>" method="post" class="form-horizontal">
                     <div class="modal-body">
-                        <p>Apakah Anda Yakin mau menghapus data ini <b><?= $judul; ?></b></p>
+                        <p>Apakah Anda Yakin mau menghapus Arsip dengan judul "<b><?= $judul; ?></b>"</p>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="id_post" value="<?= $id; ?>">
+                        <input type="hidden" name="nim" value="<?= $nim; ?>">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
                         <button class="btn btn-danger">Hapus Data</button>
                     </div>

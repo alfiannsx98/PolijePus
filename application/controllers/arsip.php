@@ -48,4 +48,21 @@ class Arsip extends CI_Controller
         $this->model_arsip->hapus_arsip($nim);
         redirect('arsip');
     }
+    public function edit_arsip()
+    {
+        $nim = $this->input->post('nim');
+        $judul = $this->input->post('judul');
+        $abstrak = $this->input->post('abstrak');
+        $keywords = $this->input->post('keywords');
+        $id_jns_arsip = $this->input->post('id_jns_arsip');
+
+        $this->db->set('judul', $judul);
+        $this->db->set('abstrak', $abstrak);
+        $this->db->set('keywords', $keywords);
+        $this->db->set('id_jns_arsip', $id_jns_arsip);
+        $this->db->where('nim', $nim);
+        $this->db->update('arsip');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat Data telah Berhasil Diperbarui</div>');
+        redirect('arsip');
+    }
 }
