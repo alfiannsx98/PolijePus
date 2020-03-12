@@ -4,10 +4,11 @@ class model_koleksi extends CI_Model
 {
     function getKoleksi()
     {
-        $getKoleks = "SELECT `koleksi`.*,`kategori_koleksi`.`nama_kategori` 
-        FROM `koleksi` JOIN `kategori_koleksi`
-        ON `koleksi`.`id_kategori` = `kategori_koleksi`.`id_kategori`
-        ";
+        // $getKoleks = "SELECT `koleksi`.*,`kategori_koleksi`.`nama_kategori` 
+        // FROM `koleksi` JOIN `kategori_koleksi`
+        // ON `koleksi`.`id_kategori` = `kategori_koleksi`.`id_kategori`
+        // ";
+        $getKoleks = "SELECT * FROM koleksi";
         return $this->db->query($getKoleks)->result_array();
     }
     function edit_koleksi($id_koleksi, $judul, $nim, $isbn, $penerbit, $penulis, $tahun_terbit)
