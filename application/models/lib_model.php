@@ -15,6 +15,11 @@ class lib_model extends CI_Model{
     }
     public function cariDataKoleksi()
     {
+        $getKoleks1 = "SELECT `koleksi`.*,`kategori_koleksi`.`nama_kategori` 
+        FROM `koleksi` JOIN `kategori_koleksi`
+        ON `koleksi`.`id_kategori` = `kategori_koleksi`.`id_kategori`
+        ";
+
         $keyword = $this->input->post('keyword', true);
         $this->db->like('judul', $keyword);
         $this->db->or_like('nim', $keyword);
