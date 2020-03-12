@@ -12,7 +12,7 @@
                 </div>
             <?php endif; ?>
             <?= $this->session->flashdata('message'); ?>
-            
+            <?php echo $this->session->flashdata('notif') ?>
             <button type="button" data-toggle="modal" data-target="#newModal" class="btn btn-primary mb-3">Tambah Data Baru</button>
             <button type="button" data-toggle="modal" data-target="#modalExcel" class="btn btn-success mb-3">Import Data dari Excel</button>
             <table class="table table-hover">
@@ -130,10 +130,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <?= form_open_multipart('koleksi'); ?>
+            <?= form_open_multipart('koleksi/upload'); ?>
                 <p>
                     <label for="">Pilih File Excel yang mau diupload</label>
-                    <input type="file" name="file" id="file" required accept=".xls, .xlsx">
+                    <input type="file" name="userfile" id="userfile">
                 </p>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>

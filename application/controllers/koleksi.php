@@ -113,33 +113,54 @@ class Koleksi extends CI_Controller
         redirect('koleksi/kategori_koleksi');
     }
     // Fungsi untuk upload excel untuk diconvert menjadi database.
-    function fetch()
+    public function upload()
     {
-        $data = $this->model_excel->select();
-        $output = 
-        '
-            <h3 align="center">Total Data - '.$data->num_rows().'</h3>
-            <table class="table table-striped table-bordered">
-                <tr>
-                    <th>Judul</th>
-                    <th>nim</th>
-                    <th>isbn</th>
-                    <th>penerbit</th>
-                    <th>tahun_terbit</th>
-                    <th>nama_kategori</th>
-                </tr>
-            ';
-            foreach($data->result() as $row)
-            {
-                $output .=
-                '
-                    <tr>
-                        <td>'.$row->judul.'</td>
-                        <td>'.$row->penulis.'</td>
-                    </tr>
-                ';
+        include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+
+        $config['upload_pathj'] = realpath('excel');
+        $config['allowed_types'] = 'xlsx|xls|csv';
+        $config['max_size'] = '10000';
+        $config['encrypt_name'] = true;
+
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload()){
+
+            // upload gagal
+            $this->session->set_flashdata('notif', '<div class="alert alert-danger"><b>PROSES IMPORT GAGAL!</b> '.$this->upload->display_errors().'</div>');
+
+            redirect('koleksi');
+        }else{
+            $data_upload = $this->upload->data();
+
+            $excelreader = new PHPExcel_Reader_Excel2007();
+            $loadexcel = $excelreader->load('excel/'.$data_upload['file_name']);
+            $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true, true);
+            $data = array();
+
+            $numrow = 1;
+            foreach($sheet as $row){
+                if($numrow > 1){
+                    array_push($data, array(
+                        'id_koleksi' => $row['A'],
+                        'judul' => $row['B'],
+                        'nim' => $row['C'],
+                        'isbn' => $row['D'],
+                        'penerbit' => $row['E'],
+                        'penulis' => $row['F'],
+                        'tahun_terbit' => $row['G'],
+                        'nama_kategori' => $row['H'],
+                    ));
+                }
+                $numrow++;
             }
-        $output .= '</table>';
-        echo $output;
+            $this->db->insert_batch('koleksi', $data);
+
+            unlink(realpath('excel/'.$data_upload['file_name']));
+
+            $this->session->set_flashdata('notif', '<div class="alert alert-success"><b>PROSES IMPORT BERHASIL!</b> Data berhasil diimport!</div>');
+
+            redirect('koleksi');
+        }
     }
 }
