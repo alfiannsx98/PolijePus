@@ -34,10 +34,23 @@
                 data tidak ditemukan.
                 </div>
             <?php endif; ?>
+            <h5><b>Hasil : <?= $total_rows; ?></b></h5>
             <ul class="list-group">
-            <?php $id = $koleksi['id_koleksi']; ?>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">nim</th>
+                            <th scope="col">nim</th>
+                            <th scope="col">nim</th>
+                            <th scope="col">nim</th>
+                            <th scope="col">nim</th>
+                        </tr>
+                    </thead>
+                </table>
                 <?php foreach ($koleksi as $kl) : ?>
+                <?php $id = $kl['id_koleksi']; ?>
                 <li class="list-group-item">
+                <?= ++$start ?>
                     <?= $kl['judul']; ?>
                     <?= $kl['nim']; ?>
                     <?= $kl['isbn']; ?>
@@ -64,7 +77,7 @@
     $penerbit = $i['penerbit'];
     $penulis = $i['penulis'];
     $tahun_terbit = $i['tahun_terbit'];
-    $nama_kategori = $i['nama_kategori']
+    $nama_kategori = $i['nama_kategori'];
     ?>
     <div class="modal fade" id="modal_edit<?= $id_koleksi; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -75,21 +88,22 @@
                 </div>
                 <?= form_open_multipart('koleksi/edit_koleksi'); ?>
                 <div class="modal-body">
-                    <div class="row mt-3">
-                        <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md">
                             <div class="card">
                                 <div class="card-header"></div>
                             <div class="card-body">
-                                <h5 class="card-title"><?= $i['judul']; ?></h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><?= $i['nim']; ?></h6>
-                                <p class="card-text"><?= $i['isbn']; ?></p>
-                                <p class="card-text"><?= $i['penerbit']; ?></p>
+                                <h5 class="card-title">Judul Buku = "<?= $i['judul']; ?>"</h5>
+                                <h6 class="card-text">Pengarang Buku = "<?= $i['nim']; ?>"</h6>
+                                <h6 class="card-text"><?= $i['isbn']; ?></h6>
+                                <h6 class="card-text"><?= $i['penerbit']; ?></h6>
                             </div>
                         </div>
                     </div>
                 </div>
+                <br>
                     <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
+                        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Tutup</button>
                     </div>
                 </div>
                 </form>
@@ -97,4 +111,6 @@
         </div>
     </div>
     <?php endforeach; ?>
+    <br>
+        <?= $this->pagination->create_links();?>
 </div>
