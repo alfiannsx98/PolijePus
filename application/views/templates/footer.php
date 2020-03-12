@@ -72,7 +72,7 @@
         });
     });
 </script>
-<script>
+<!-- <script>
     $(document).ready(function(){
         function load_data();
         {
@@ -85,7 +85,7 @@
             })
         }
     })
-</script>
+</script> -->
 
 </body>
 

@@ -7,8 +7,6 @@ class Koleksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('model_koleksi');
-        $this->load->model('model_excel');
-        $this->load->library('excel');
         // is_logged_in();
     }
     public function index()
