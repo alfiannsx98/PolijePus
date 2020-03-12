@@ -15,9 +15,10 @@
 
     <div class="row mt-3">
         <div class="col-md-12">
+        <h3>Daftar Koleksi</h3>
             <form action="" method="post">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cari data Koleksi Buku / Skripsi / Tugas Akhir.." name="keyword">
+                    <input type="text" class="form-control" placeholder="Cari data Koleksi Buku / Skripsi / Tugas Akhir.." name="keyword" autofocus>
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">Cari</button>
                     </div>
@@ -28,39 +29,52 @@
 
     <div class="row mt-3">
         <div class="col-md-12">
-            <h3>Daftar Koleksi</h3>
-            <?php if (empty($koleksi)) : ?>
-                <div class="alert alert-danger" role="alert">
-                data tidak ditemukan.
-                </div>
-            <?php endif; ?>
+
             <h5><b>Hasil : <?= $total_rows; ?></b></h5>
             <ul class="list-group">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">nim</th>
-                            <th scope="col">nim</th>
-                            <th scope="col">nim</th>
-                            <th scope="col">nim</th>
-                            <th scope="col">nim</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Judul</th>
+                            <th scope="col">NIM</th>
+                            <th scope="col">ISBN</th>
+                            <th scope="col">Penerbit</th>
+                            <th scope="col">Penulis</th>
+                            <th scope="col">Tahun Terbit</th>
+                            <th scope="col">Nama Kategori</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
-                </table>
+                <tbody>
+                    <?php if (empty($koleksi)) : ?>
+                    <tr>
+                        <td colspan="9">
+                            <div class="alert alert-danger" role="alert">
+                            data tidak ditemukan.
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+
                 <?php foreach ($koleksi as $kl) : ?>
                 <?php $id = $kl['id_koleksi']; ?>
+                <tr>
                 <li class="list-group-item">
-                <?= ++$start ?>
-                    <?= $kl['judul']; ?>
-                    <?= $kl['nim']; ?>
-                    <?= $kl['isbn']; ?>
-                    <?= $kl['penerbit']; ?>
-                    <?= $kl['penulis']; ?>
-                    <?= $kl['tahun_terbit']; ?>
-                    <?= $kl['nama_kategori']; ?>
-                    <button class="badge badge-primary float-right" data-toggle="modal" data-target="#modal_edit<?= $id; ?>">detail</button>
+                <th scope="row"><?= ++$start ?></th>
+                    <td><?= $kl['judul']; ?></td>
+                    <td><?= $kl['nim']; ?></td>
+                    <td><?= $kl['isbn']; ?></td>
+                    <td><?= $kl['penerbit']; ?></td>
+                    <td><?= $kl['penulis']; ?></td>
+                    <td><?= $kl['tahun_terbit']; ?></td>
+                    <td><?= $kl['nama_kategori']; ?></td>
+                    <td><button class="badge badge-primary float-right" data-toggle="modal" data-target="#modal_edit<?= $id; ?>">detail</button></td>
                 </li>
+                </tr>
                 <?php endforeach; ?>
+                </tbody>
+                </table>
             </ul>
         </div>
     </div>
