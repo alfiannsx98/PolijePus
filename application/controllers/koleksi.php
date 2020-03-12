@@ -117,7 +117,7 @@ class Koleksi extends CI_Controller
     {
         include APPPATH.'third_party/PHPExcel/PHPExcel.php';
 
-        $config['upload_pathj'] = realpath('excel');
+        $config['upload_path'] = realpath('excel');
         $config['allowed_types'] = 'xlsx|xls|csv';
         $config['max_size'] = '10000';
         $config['encrypt_name'] = true;
