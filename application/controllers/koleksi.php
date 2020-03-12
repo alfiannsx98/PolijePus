@@ -7,6 +7,8 @@ class Koleksi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('model_koleksi');
+        $this->load->model('model_excel');
+        $this->load->library('excel');
         // is_logged_in();
     }
     public function index()
@@ -111,5 +113,35 @@ class Koleksi extends CI_Controller
         $id_kategori = $this->input->post('id_kategori');
         $this->model_koleksi->hapus_kategori($id_kategori);
         redirect('koleksi/kategori_koleksi');
+    }
+    // Fungsi untuk upload excel untuk diconvert menjadi database.
+    function fetch()
+    {
+        $data = $this->model_excel->select();
+        $output = 
+        '
+            <h3 align="center">Total Data - '.$data->num_rows().'</h3>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Judul</th>
+                    <th>nim</th>
+                    <th>isbn</th>
+                    <th>penerbit</th>
+                    <th>tahun_terbit</th>
+                    <th>nama_kategori</th>
+                </tr>
+            ';
+            foreach($data->result() as $row)
+            {
+                $output .=
+                '
+                    <tr>
+                        <td>'.$row->judul.'</td>
+                        <td>'.$row->penulis.'</td>
+                    </tr>
+                ';
+            }
+        $output .= '</table>';
+        echo $output;
     }
 }

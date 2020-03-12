@@ -12,9 +12,9 @@
                 </div>
             <?php endif; ?>
             <?= $this->session->flashdata('message'); ?>
-
+            
             <button type="button" data-toggle="modal" data-target="#newModal" class="btn btn-primary mb-3">Tambah Data Baru</button>
-
+            <button type="button" data-toggle="modal" data-target="#modalExcel" class="btn btn-success mb-3">Import Data dari Excel</button>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -117,6 +117,35 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Import Data dari EXCEL -->
+
+<div class="modal fade" id="modalExcel" tabindex="-1" role="dialog" aria-labelledby="modalExcel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalExcel">Tambah Koleksi</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?= form_open_multipart('koleksi'); ?>
+                <p>
+                    <label for="">Pilih File Excel yang mau diupload</label>
+                    <input type="file" name="file" id="file" required accept=".xls, .xlsx">
+                </p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" name="import" value="Import" class="btn btn-success">Import Data</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Akhir Modal Import DATA dari EXCEL -->
 
 <!--MODAL EDIT DATA-->
 <?php

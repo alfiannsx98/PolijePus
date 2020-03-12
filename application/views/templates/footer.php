@@ -72,6 +72,20 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function(){
+        function load_data();
+        {
+            $.ajax({
+                url: "<?php echo base_url(); ?>excel_import/fetch",
+                method: "POST",
+                success: function(data){
+                    $('#customer_data').html(data);
+                }
+            })
+        }
+    })
+</script>
 
 </body>
 
