@@ -46,7 +46,7 @@ class Koleksi extends CI_Controller
                 'penerbit' => ($this->input->post('penerbit')),
                 'penulis' => ($this->input->post('penulis')),
                 'tahun_terbit' => ($this->input->post('tahun_terbit')),
-                'id_kategori' => ($this->input->post('id_kategori'))
+                'nama_kategori' => ($this->input->post('nama_kategori'))
             ];
             $this->db->insert('koleksi', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Berhasil Ditambahkan</div>');
@@ -68,7 +68,7 @@ class Koleksi extends CI_Controller
         $penerbit = $this->input->post('penerbit');
         $penulis= $this->input->post('penulis');
         $tahun_terbit= $this->input->post('tahun_terbit');
-        $id_kategori= $this->input->post('id_kategori');
+        $nama_kategori = $this->input->post('nama_kategori');
 
         $this->db->set('judul', $judul);
         $this->db->set('nim', $nim);
@@ -76,6 +76,7 @@ class Koleksi extends CI_Controller
         $this->db->set('penerbit', $penerbit);
         $this->db->set('penulis', $penulis);
         $this->db->set('tahun_terbit', $tahun_terbit);
+        $this->db->set('nama_kategori', $nama_kategori);
         $this->db->where('id_koleksi', $id_koleksi);
         $this->db->update('koleksi');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat Data telah Berhasil Diperbarui</div>');

@@ -102,9 +102,9 @@
                 </div>
                 <div class="form-group">
                     <label for="">Kategori Koleksi</label>
-                    <select name="id_kategori" id="id_kategori" class="form-control">
+                    <select name="nama_kategori" id="nama_kategori" class="form-control">
                         <?php foreach ($getKategoriKoleksi as $kt) : ?>
-                            <option value="<?= $kt['id_kategori']; ?>"><?= $kt['nama_kategori']; ?></option>
+                            <option value="<?= $kt['nama_kategori']; ?>"><?= $kt['nama_kategori']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -131,10 +131,17 @@
             </div>
             <div class="modal-body">
             <?= form_open_multipart('koleksi/upload'); ?>
-                <p>
+                <div class="form-group">
+                    <label for="">Pilih File Excel</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="userfile" name="userfile">
+                        <label for="userfile" class="custom-file-label">Pilih Data Excel yang sesuai . . .</label>
+                    </div>
+                </div>
+                <!-- <p>
                     <label for="">Pilih File Excel yang mau diupload</label>
-                    <input type="file" name="userfile" id="userfile">
-                </p>
+                    <input type="file" class="custom-file-input" name="userfile" id="userfile">
+                </p> -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     <button type="submit" name="import" value="Import" class="btn btn-success">Import Data</button>
@@ -157,6 +164,7 @@ foreach ($koleksi as $i) :
     $penerbit = $i['penerbit'];
     $penulis = $i['penulis'];
     $tahun_terbit = $i['tahun_terbit'];
+    $nama_kategori = $i['nama_kategori'];
     ?>
     <div class="modal fade" id="modal_edit<?= $id_koleksi; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -211,9 +219,9 @@ foreach ($koleksi as $i) :
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label  col-xs-3">Kategori Koleksi</label>
-                        <select class="form-control" name="id_kategori" id="id_kategori">
+                        <select class="form-control" name="nama_kategori" id="nama_kategori">
                             <?php foreach ($getKategoriKoleksi as $bc) : ?>
-                                <option value="<?= $bc['id_kategori']; ?>"><?= $bc['nama_kategori']; ?></option>
+                                <option value="<?= $bc['nama_kategori']; ?>"><?= $bc['nama_kategori']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
