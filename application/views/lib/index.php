@@ -29,8 +29,9 @@
 
     <div class="row mt-3">
         <div class="col-md-12">
-
-            <h5><b>Hasil : <?= $total_rows; ?></b></h5>
+            <?= form_open_multipart('data_koleksi/reset'); ?>
+            <h5><b>Hasil : <?= $total_rows; ?></b><button class= "btn btn-secondary" type="submit" name="reset">Reset</button></h5>
+            </form>
             <ul class="list-group">
                 <table class="table">
                     <thead>
@@ -60,7 +61,7 @@
                 <?php foreach ($koleksi as $kl) : ?>
                 <?php $id = $kl['id_koleksi']; ?>
                 <tr>
-                <li class="list-group-item">
+                
                 <th scope="row"><?= ++$start ?></th>
                     <td><?= $kl['judul']; ?></td>
                     <td><?= $kl['nim']; ?></td>
@@ -70,7 +71,7 @@
                     <td><?= $kl['tahun_terbit']; ?></td>
                     <td><?= $kl['nama_kategori']; ?></td>
                     <td><button class="badge badge-primary float-right" data-toggle="modal" data-target="#modal_edit<?= $id; ?>">detail</button></td>
-                </li>
+                
                 </tr>
                 <?php endforeach; ?>
                 </tbody>

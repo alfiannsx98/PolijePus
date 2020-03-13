@@ -5,8 +5,10 @@ class data_koleksi extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('session');
         $this->load->model('lib_model');
         $this->load->library('form_validation');
+        $this->load->model('model_koleksi');
     }
 
     public function index()
@@ -48,6 +50,22 @@ class data_koleksi extends CI_Controller
         $this->load->view('lib/header', $data);
         $this->load->view('lib/index', $data);
         $this->load->view('lib/footer');
+    }
+
+    public function reset() {
+
+        $this->load->library('pagination');
+
+        $this->load->model('lib_model', 'koleksi');
+        $data['koleksi'] = $this->model_koleksi->getKoleksi();
+        $this->session->unset_userdata('keyword');
+
+        $this->load->view('lib/header', $data);
+        $this->load->view('lib/index', $data);
+        $this->load->view('lib/footer');
+
+        redirect('data_koleksi');
+
     }
 
 
