@@ -24,6 +24,12 @@ class Koleksi extends CI_Controller
         $data['koleksi'] = $this->model_koleksi->getKoleksi();
         $data['getKategoriKoleksi'] = $this->db->get('kategori_koleksi')->result_array();
 
+            $query_koleksi = $this->db->query("SELECT * FROM koleksi"); 
+            $field = $query_koleksi->num_rows();
+            $d = date('dm', time());
+            $k = "KL";
+            $id_koleksi = "$k" . $d . ($field + 1);
+
         if ($this->form_validation->run() == false){
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -115,6 +121,13 @@ class Koleksi extends CI_Controller
     // Fungsi untuk upload excel untuk diconvert menjadi database.
     public function upload()
     {
+        
+            $query_koleksi = $this->db->query("SELECT * FROM koleksi"); 
+            $field = $query_koleksi->num_rows();
+            $d = date('dm', time());
+            $k = "KL";
+            $id_koleksi = "$k" . $d . $field;
+
         include APPPATH.'third_party/PHPExcel/PHPExcel.php';
 
         $config['upload_path'] = realpath('excel');
@@ -131,6 +144,8 @@ class Koleksi extends CI_Controller
 
             redirect('koleksi');
         }else{
+            
+            ini_set('display_errors','off');
             $data_upload = $this->upload->data();
 
             $excelreader = new PHPExcel_Reader_Excel2007();
@@ -142,7 +157,7 @@ class Koleksi extends CI_Controller
             foreach($sheet as $row){
                 if($numrow > 1){
                     array_push($data, array(
-                        'id_koleksi' => $row['A'],
+                        'id_koleksi' => $id_koleksi.$numrow,
                         'judul' => $row['B'],
                         'nim' => $row['C'],
                         'isbn' => $row['D'],
