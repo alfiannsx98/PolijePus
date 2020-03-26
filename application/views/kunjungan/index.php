@@ -71,7 +71,7 @@
                 <?= form_open_multipart('kunjungan'); ?>
                 <div class="form-group">
                     <label for="">ID Kunjungan</label>
-                    <input type="text" class="form-control" id="id_kjn" name="id_kjn" value="<?= $kodeunik; ?>" readonly>
+                    <input type="text" class="form-control" id="id_kjn" name="id_kjn" value="<?= $id_kjn; ?>" readonly>
                 </div>
                 <div class="form-group">
                     <label for="">Tanggal - Waktu</label>
@@ -87,8 +87,8 @@
                     <input type="text" class="form-control" id="nim_nip" name="nim_nip" placeholder="Masukkan NIM / NIP">
                 </div>
                 <div class="form-group">
-                    <label for="">Jenis Kelamin</label>
-                    <select class="custom-select" name="jk" value="<?php echo $jkn->jk ?>">>
+                    <label for="jk">Jenis Kelamin</label>
+                    <select class="custom-select" name="jk" value="<?php echo $kjn->jk ?>">>
                         <option selected disabled>Pilih Jenis Kelamin</option>
                         <option>Laki-Laki</option>
                         <option>Perempuan</option>
@@ -150,8 +150,8 @@
 
 <!--MODAL EDIT DATA-->
 <!-- <?php
-        foreach ($koleksi as $i) :
-            $id_koleksi = $i['id_koleksi'];
+        foreach ($kunjungan as $kjn) :
+            $id_kjn = $i['id_kjn'];
             $judul = $i['judul'];
             $nim = $i['nim'];
             $isbn = $i['isbn'];
@@ -160,7 +160,7 @@
             $prodi = $i['prodi'];
             $nama_kategori = $i['nama_kategori'];
         ?>
-    <div class="modal fade" id="modal_edit<?= $id_koleksi; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal fade" id="modal_edit<?= $id_kjn; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -229,19 +229,19 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal_hapus<?= $id_koleksi; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal fade" id="modal_hapus<?= $id_kjn; ?>" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Hapus Menu</h3>
                     <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
                 </div>
-                <form action="<?= base_url() . 'koleksi/hapus_koleksi'; ?>" method="post" class="form-horizontal">
+                <form action="<?= base_url() . 'kunjungan/hapus_kunjungan'; ?>" method="post" class="form-horizontal">
                     <div class="modal-body">
-                        <p>Apakah Anda Yakin mau Menghapus Koleksi dengan judul "<b><?= $judul; ?></b>"</p>
+                        <p>Apakah Anda Yakin mau Menghapus Kunjungan dengan ID "<b><?= $id_kjn; ?></b>"</p>
                     </div>
                     <div class="modal-footer">
-                        <input type="hidden" name="id_koleksi" value="<?= $id_koleksi; ?>">
+                        <input type="hidden" name="id_kjn" value="<?= $id_kjn; ?>">
                         <button class="btn" data-dismiss="modal" aria-hidden="true">Tutup</button>
                         <button class="btn btn-danger">Hapus Data</button>
                     </div>

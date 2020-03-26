@@ -27,7 +27,7 @@ class Kunjungan extends CI_Controller
 
         $data['kunjungan'] = $this->model_kunjungan->getKunjungan();
 
-        $data['kodeunik'] = $this->model_kunjungan->buat_kode();
+        $data['id_kjn'] = $this->model_kunjungan->buat_kode();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2020 at 07:21 PM
+-- Generation Time: Mar 26, 2020 at 07:51 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -140,9 +140,9 @@ CREATE TABLE `kunjungan` (
   `tgl` datetime NOT NULL,
   `nama_kjn` varchar(50) NOT NULL,
   `nim_nip` varchar(20) NOT NULL,
-  `jk` enum('Perempuan','Laki-Laki') NOT NULL,
+  `jk` enum('Laki-Laki','Perempuan') NOT NULL,
   `status` varchar(20) NOT NULL,
-  `prodi` varchar(10) NOT NULL
+  `prodi` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -154,8 +154,9 @@ INSERT INTO `kunjungan` (`id_kjn`, `tgl`, `nama_kjn`, `nim_nip`, `jk`, `status`,
 ('KJN0002', '0000-00-00 00:00:00', 'Saya', 'E41181765', 'Perempuan', 'Mahasiswa', 'TKK'),
 ('KJN0003', '2020-03-27 12:33:19', 'Mustika', 'E41181630', 'Perempuan', 'Mahasiswa', 'TIF'),
 ('KJN0004', '2020-03-27 12:45:42', 'Saya', 'E41181765', 'Perempuan', 'Teknisi', 'on'),
-('KJN0005', '2020-03-27 12:47:17', 'Aku', 'E41181630', 'Perempuan', 'Umum', 'Bukan Maha'),
-('KJN0006', '2020-03-27 12:50:53', 'Saya', 'E41181765', 'Perempuan', 'Mahasiswa', 'MIF');
+('KJN0005', '2020-03-27 12:47:17', 'Aku', 'E41181630', 'Perempuan', 'Umum', 'Bukan Mahasiswa TI'),
+('KJN0006', '2020-03-27 12:50:53', 'Saya', 'E41181765', 'Perempuan', 'Mahasiswa', 'MIF'),
+('KJN0007', '2020-03-27 01:50:26', 'Ikhsan Munir', 'E41181754', 'Laki-Laki', 'Umum', 'Bukan Mahasiswa TI');
 
 -- --------------------------------------------------------
 
