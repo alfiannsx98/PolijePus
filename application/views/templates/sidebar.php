@@ -67,6 +67,10 @@
     <!-- Divider -->
     <hr class="sidebar-divider mt-3">
 
+    tempatnya daftar kunjungan
+
+    <hr class="sidebar-divider mt-3">
+
     <?php endforeach; ?>
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('auth/logout') ?>">
