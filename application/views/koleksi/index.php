@@ -132,6 +132,10 @@
             <div class="modal-body">
             <?= form_open_multipart('koleksi/upload'); ?>
                 <div class="form-group">
+                    <label for="">Download Template Excel</label>
+                    <a style="float: right;" class="btn btn-secondary" href="<?php echo base_url("excel/template.xlsx"); ?>">Download</a>
+                </div>
+                <div class="form-group">
                     <label for="">Pilih File Excel</label>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="userfile" name="userfile">
